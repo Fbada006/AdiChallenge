@@ -23,9 +23,11 @@ import javax.inject.Singleton
 class MainAppModule {
 
     @Provides
+    @Singleton
     fun provideLoggingInterceptor() = LoggingInterceptor.create()
 
     @Provides
+    @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor) =
         HttpClient.create(httpLoggingInterceptor)
 
@@ -56,6 +58,7 @@ class MainAppModule {
     fun provideOrdersBaseUrl(): String = "https://609c06b02b549f00176e4f21.mockapi.io/"
 
     @Provides
+    @Singleton
     fun providesProductRepository(
         service: AdidasProductService
     ): ProductRepository = ProductRepositoryImpl(service)

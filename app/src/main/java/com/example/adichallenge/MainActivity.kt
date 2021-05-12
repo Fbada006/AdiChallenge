@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adichallenge.adapter.ProductAdapter
 import com.example.adichallenge.databinding.ActivityMainBinding
 import com.example.adichallenge.models.Product
@@ -24,7 +25,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         productAdapter = ProductAdapter(productList)
+        initRv()
         observeViewModel()
+    }
+
+    private fun initRv() {
+        binding.rvProduct.apply {
+            adapter = productAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
     }
 
     private fun observeViewModel() {

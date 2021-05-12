@@ -4,9 +4,10 @@ import com.example.adichallenge.models.Product
 import com.example.adichallenge.network.AdidasProductService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class ProductRepositoryImpl(
-    private val productService: AdidasProductService
+class ProductRepositoryImpl @Inject constructor(
+    val productService: AdidasProductService
 ) : ProductRepository {
 
     override suspend fun getAllProducts(): Flow<List<Product>> =
