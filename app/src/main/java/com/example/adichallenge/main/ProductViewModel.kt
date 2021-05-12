@@ -1,4 +1,4 @@
-package com.example.adichallenge
+package com.example.adichallenge.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adichallenge.models.Product
 import com.example.adichallenge.repo.ProductRepository
+import com.example.adichallenge.utils.Event
 import com.example.adichallenge.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -16,8 +17,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    val productRepository: ProductRepository
+    private val productRepository: ProductRepository
 ) : ViewModel() {
+
+    private val _navigateToSelectedProduct = MutableLiveData<Event<Product>>()
+
+    val navigateToSelectedProduct: LiveData<Event<Product>>
+        get() = _navigateToSelectedProduct
 
     private var _products = MutableLiveData<Resource<List<Product>>>()
 
@@ -38,5 +44,9 @@ class ProductViewModel @Inject constructor(
                     _products.value = Resource.Success(data)
                 }
         }
+    }
+
+    fun displayDeliveryDetails(data: Product) {
+        _navigateToSelectedProduct.value = Event(data)
     }
 }

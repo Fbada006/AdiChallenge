@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
-    val productService: AdidasProductService
+    private val productService: AdidasProductService
 ) : ProductRepository {
 
     override suspend fun getAllProducts(): Flow<List<Product>> =
