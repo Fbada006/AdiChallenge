@@ -19,7 +19,9 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = products?.get(position)
-        holder.itemView.setOnClickListener { clickListener }
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(product!!)
+        }
         holder.bind(product)
     }
 

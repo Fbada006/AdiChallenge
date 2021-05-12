@@ -2,16 +2,19 @@ package com.example.adichallenge.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adichallenge.adapter.ProductAdapter
 import com.example.adichallenge.databinding.ActivityMainBinding
+import com.example.adichallenge.details.ProductDetailsActivity
 import com.example.adichallenge.models.Product
 import com.example.adichallenge.utils.EXTRA_PRODUCT
 import com.example.adichallenge.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -37,7 +40,8 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModelForNavigation() {
         viewmodel.navigateToSelectedProduct.observe(this, { productEvent ->
             productEvent.getContentIfNotHandled()?.let { product ->
-                val intent = Intent()
+                Log.e("TAG", "observeViewModelForNavigation: " )
+                val intent = Intent(this, ProductDetailsActivity::class.java)
                 intent.putExtra(EXTRA_PRODUCT, product)
                 startActivity(intent)
             }
