@@ -3,4 +3,5 @@
     <string name="image_of_product">Image of product</string>
     <string name="product_price">$: %d</string>
     <string name="something_went_wrong">Something went wrong. Please try again.</string>
+    <string name="search">Search</string>
 </resources>
