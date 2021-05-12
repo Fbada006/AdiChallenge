@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AdiChallenge</string>
     <string name="image_of_product">Image of product</string>
+    <string name="product_price">$: %d</string>
 </resources>
