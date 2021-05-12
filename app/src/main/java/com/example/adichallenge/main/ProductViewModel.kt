@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adichallenge.models.Product
+import com.example.adichallenge.models.Review
 import com.example.adichallenge.repo.ProductRepository
 import com.example.adichallenge.utils.Event
 import com.example.adichallenge.utils.Resource
@@ -29,6 +30,10 @@ class ProductViewModel @Inject constructor(
 
     val products: LiveData<Resource<List<Product>>> = _products
 
+    private var _reviews = MutableLiveData<Resource<List<Review>>>()
+
+    val reviews: LiveData<Resource<List<Review>>> = _reviews
+
     init {
         getAllProducts()
     }
@@ -48,5 +53,18 @@ class ProductViewModel @Inject constructor(
 
     fun displayDeliveryDetails(data: Product) {
         _navigateToSelectedProduct.value = Event(data)
+    }
+
+    fun getProductReviews(id: String) {
+        viewModelScope.launch {
+            productRepository.getProductReviewsById(id)
+                .onStart {
+                    _reviews.value = Resource.Loading()
+                }.catch { error ->
+                    _reviews.value = Resource.Failure(error)
+                }.collect { data ->
+                    _reviews.value = Resource.Success(data)
+                }
+        }
     }
 }
