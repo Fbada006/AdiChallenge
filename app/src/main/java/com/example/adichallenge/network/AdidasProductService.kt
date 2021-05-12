@@ -4,6 +4,6 @@ import com.example.adichallenge.models.Product
 import retrofit2.http.GET
 
 interface AdidasProductService {
-    @GET
+    @GET("product")
     suspend fun getAllProducts(): List<Product>
 }

@@ -1,6 +1,8 @@
 package com.example.adichallenge.di
 
 import com.example.adichallenge.network.AdidasProductService
+import com.example.adichallenge.repo.ProductRepository
+import com.example.adichallenge.repo.ProductRepositoryImpl
 import com.example.adichallenge.utils.HttpClient
 import com.example.adichallenge.utils.LoggingInterceptor
 import com.example.adichallenge.utils.MoshiCreator
@@ -18,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+class MainAppModule {
 
     @Provides
     fun provideLoggingInterceptor() = LoggingInterceptor.create()
@@ -51,5 +53,10 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideOrdersBaseUrl(): String = ""
+    fun provideOrdersBaseUrl(): String = "https://609c06b02b549f00176e4f21.mockapi.io/"
+
+    @Provides
+    fun providesProductRepository(
+        service: AdidasProductService
+    ): ProductRepository = ProductRepositoryImpl(service)
 }
