@@ -9,7 +9,8 @@ import com.example.adichallenge.databinding.ProductItemBinding
 import com.example.adichallenge.models.Product
 
 class ProductAdapter(
-    private val products: List<Product>?
+    private val products: List<Product>?,
+    private val clickListener: OnProductClickListener
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -18,6 +19,9 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = products?.get(position)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(product!!)
+        }
         holder.bind(product)
     }
 
@@ -46,5 +50,9 @@ class ProductAdapter(
                 return ProductViewHolder(binding)
             }
         }
+    }
+
+    class OnProductClickListener(val clickListener: (data: Product) -> Unit) {
+        fun onClick(data: Product) = clickListener(data)
     }
 }
