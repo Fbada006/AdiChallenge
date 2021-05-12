@@ -82,8 +82,12 @@ dependencies {
 
     // Testing
     testImplementation "junit:junit:$junit_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "com.google.truth:truth:$truth_version"
 }
 
 kapt {
